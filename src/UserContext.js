@@ -40,6 +40,7 @@ export const UserStorage = ({ children }) => {
       const { token } = await tokenRes.json();
       window.localStorage.setItem('token', token);
       await getUser(token);
+      setLogin(true);
       navigate('/conta');
     } catch (err) {
       setError(err.message);
@@ -60,6 +61,7 @@ export const UserStorage = ({ children }) => {
           const response = await fetch(url, options);
           if (!response.ok) throw new Error('Token Inválido!');
           await getUser(token);
+          setLogin(true);
         } catch (err) {
           userLogout();
         } finally {
